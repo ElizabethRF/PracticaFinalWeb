@@ -1,26 +1,45 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { Component } from 'react';
 import './App.css';
+import '../node_modules/react-vis/dist/style.css';
+import { BrowserRouter as Router, Switch, Route, Link} from "react-router-dom";
+import PrincipalView from './components/PrincipalView';
+import BarGraph from './components/BarGraph';
+import DataTable from './components/DataTable';
+import LineGraph from './components/LineGraph';
+import PieGraph from './components/PieGraph';
+import RenderData from './components/RenderData';
+import ApolloClient from 'apollo-boost';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+
+class App extends Component {
+  render() {
+    return(
+      <div>
+      <RenderData/>
+    <Router>
+      <div>
+        {/* A <Switch> looks through its children <Route>s and
+            renders the first one that matches the current URL. */}
+          <Switch>
+            <Route path="/BarGraph">
+              <BarGraph/>
+            </Route>
+            <Route path="/LineGraph">
+              <LineGraph/>
+            </Route>
+            <Route path="/PieGraph">
+              <PieGraph/>
+            </Route>
+            <Route path="/">
+              <PrincipalView/>
+            </Route>
+          </Switch>
+      </div>
+    </Router>
     </div>
-  );
+    );
+    
+  }
 }
 
 export default App;
